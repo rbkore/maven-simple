@@ -5,16 +5,11 @@ pipeline{
     
     }
     stages{
+        
         stage("Clone")
         {
             steps{
                 git 'https://github.com/rbkore/maven-simple'
-            }
-        }
-        stage("Build")
-        {
-            steps{
-                sh 'mvn clean package'
             }
         }
         
@@ -29,5 +24,14 @@ pipeline{
                                }
             }
         }
+        
+        stage("Build")
+        {
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        
+        
     }
 }
