@@ -19,7 +19,7 @@ pipeline{
                 script {
                           def scannerHome = tool 'sonar_scanner';
                           withSonarQubeEnv("sonar_server") {
-                          sh "mvn sonar:sonar"
+                          sh "mvn sonar:sonar -Dsonar.host.url=http://localhost:9000"
                                        }
                                }
             }
