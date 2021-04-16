@@ -21,11 +21,12 @@ pipeline{
         stage('SonarQube analysis') 
         {
             steps{
-                script{
-                    withSonarQubeEnv(sonar_server){
-                    sh "mvn sonar:sonar"
-                    }
-                }
+                script {
+                          def scannerHome = tool 'sonar_scanner';
+                          withSonarQubeEnv("sonar_server") {
+                          sh "mvn sonar:sonar"
+                                       }
+                               }
             }
         }
     }
