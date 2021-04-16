@@ -18,20 +18,12 @@ pipeline{
             }
         }
         
-        stage('SonarCloud') {
-            environment {
-                SCANNER_HOME = tool 'sonar_scanner'
-                ORGANIZATION = "rbkore-github"
-                PROJECT_NAME = "rbkore_jenkins-pipeline-as-code"
-  }
-            steps {
-                withSonarQubeEnv('sonar_server') {
-                sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
-                -Dsonar.java.binaries=build/classes/java/ \
-                -Dsonar.projectKey=$PROJECT_NAME \
-            -Dsonar.sources=.'''
-                 }
+        stage('SonarQube analysis') 
+        {
+            steps{
+            def sonarqubeScannerHome = tool name: '<SONARQUBE-TOOL-NAME>'
+            sh "${sonarqubeScannerHome}/bin/sonar-scanner"
             }
-        }
+}
     }
 }
